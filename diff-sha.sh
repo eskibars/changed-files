@@ -78,7 +78,7 @@ if [[ -z $GITHUB_BASE_REF ]]; then
   fi
 
   echo "::debug::Verifying the current commit SHA: $CURRENT_SHA"
-  git rev-parse --quiet --verify "$CURRENT_SHA^{commit}" 1>/dev/null 2>&1 && exit_status=$? || exit_status=$?
+  git rev-parse --quiet --verify "$CURRENT_SHA^{}" 1>/dev/null 2>&1 && exit_status=$? || exit_status=$?
 
   if [[ $exit_status -ne 0 ]]; then
     echo "::error::Unable to locate the current sha: $CURRENT_SHA"
@@ -141,7 +141,7 @@ if [[ -z $GITHUB_BASE_REF ]]; then
   echo "::debug::Current branch $CURRENT_BRANCH..."
 
   echo "::debug::Verifying the previous commit SHA: $PREVIOUS_SHA"
-  git rev-parse --quiet --verify "$PREVIOUS_SHA^{commit}" 1>/dev/null 2>&1 && exit_status=$? || exit_status=$?
+  git rev-parse --quiet --verify "$PREVIOUS_SHA^{}" 1>/dev/null 2>&1 && exit_status=$? || exit_status=$?
 
   if [[ $exit_status -ne 0 ]]; then
     echo "::error::Unable to locate the previous sha: $PREVIOUS_SHA"
@@ -179,7 +179,7 @@ else
   fi
 
   echo "::debug::Verifying the current commit SHA: $CURRENT_SHA"
-  git rev-parse --quiet --verify "$CURRENT_SHA^{commit}" 1>/dev/null 2>&1 && exit_status=$? || exit_status=$?
+  git rev-parse --quiet --verify "$CURRENT_SHA^{}" 1>/dev/null 2>&1 && exit_status=$? || exit_status=$?
 
   if [[ $exit_status -ne 0 ]]; then
     echo "::error::Unable to locate the current sha: $CURRENT_SHA"
@@ -193,7 +193,7 @@ else
     if [[ "$INPUT_SINCE_LAST_REMOTE_COMMIT" == "true" ]]; then
       PREVIOUS_SHA=$GITHUB_EVENT_BEFORE
 
-      if ! git rev-parse --quiet --verify "$PREVIOUS_SHA^{commit}" 1>/dev/null 2>&1; then
+      if ! git rev-parse --quiet --verify "$PREVIOUS_SHA^{}" 1>/dev/null 2>&1; then
         PREVIOUS_SHA=$GITHUB_EVENT_PULL_REQUEST_BASE_SHA
       fi
     else
@@ -229,7 +229,7 @@ else
   echo "::debug::Current branch: $CURRENT_BRANCH"
 
   echo "::debug::Verifying the previous commit SHA: $PREVIOUS_SHA"
-  git rev-parse --quiet --verify "$PREVIOUS_SHA^{commit}" 1>/dev/null 2>&1 && exit_status=$? || exit_status=$?
+  git rev-parse --quiet --verify "$PREVIOUS_SHA^{}" 1>/dev/null 2>&1 && exit_status=$? || exit_status=$?
 
   if [[ $exit_status -ne 0 ]]; then
     echo "::error::Unable to locate the previous sha: $PREVIOUS_SHA"
